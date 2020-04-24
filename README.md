@@ -42,3 +42,8 @@ generate a new token jwt with command
 ```bash
 php artisan jwt:secret
 ```
+in laravel 7.x is necessary to use the command bellow. 
+
+```bash
+composer require laravel/ui "^2.0"
+```
