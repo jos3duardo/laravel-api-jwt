@@ -19,6 +19,15 @@ class AuthController extends Controller
         $credentials = $this->credentials($request);
 
         $token = \JWTAuth::attempt($credentials);
+
+        return $this->reponseToken($token);
+    }
+
+    private function reponseToken($token){
+        return $token ? ['token' => $token] :
+            response()->json([
+                'error' => \Lang::get('auth.failed')
+            ],400);
     }
 
 
