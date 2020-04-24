@@ -12,6 +12,13 @@ class AuthController extends Controller
 {
     use AuthenticatesUsers;
 
+    /**
+     * This route return a token of user if he can login credentials correct
+     *
+     * @param Request $request
+     * @return array|\Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
+     */
     public function login(Request $request)
     {
         $this->validateLogin($request);
@@ -23,6 +30,12 @@ class AuthController extends Controller
         return $this->reponseToken($token);
     }
 
+    /**
+     * The method validate the token
+     *
+     * @param $token
+     * @return array|\Illuminate\Http\JsonResponse
+     */
     private function reponseToken($token){
         return $token ? ['token' => $token] :
             response()->json([

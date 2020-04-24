@@ -47,3 +47,8 @@ in laravel 7.x is necessary to use the command bellow.
 ```bash
 composer require laravel/ui "^2.0"
 ```
+
+make command 
+```bash
+php artisan migrate --seed
+```
