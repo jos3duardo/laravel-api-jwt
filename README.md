@@ -78,3 +78,16 @@ after you will make login the request return a token, you will use the token for
 example image of the user listing route
 
 ![request](docs/list-users.png)
+
+if you need revoke a token, use the logout route with HTTP POST   
+to revoke you must be logged in
+```bash
+//token is necessary for access this route
+Route::middleware('auth:api')->namespace('Api')->group(function () {
+    Route::get('users', 'AuthController@users');
+    Route::post('logout','AuthController@logout');
+});
+```
+image preview e.g.
+
+![request](docs/logout.png)
