@@ -81,6 +81,17 @@ example image of the user listing route
 
 if you need revoke a token, use the logout route with HTTP POST   
 to revoke you must be logged in
+
+image preview e.g.
+
+![request](docs/logout.png)
+
+
+
+make a refresh token in you application   
+![request](docs/refresh.png)
+
+
 ```bash
 //token is necessary for access this route
 Route::middleware('auth:api')->namespace('Api')->group(function () {
@@ -88,6 +99,50 @@ Route::middleware('auth:api')->namespace('Api')->group(function () {
     Route::post('logout','AuthController@logout');
 });
 ```
-image preview e.g.
 
-![request](docs/logout.png)
+enable the refresh token auto
+
+create a function 
+```bash
+  protected function refresh(){
+        $token = \Auth::guard('api')->refresh();
+        return ['token' => $token];
+    }
+```
+update the routes * routes has complete *
+
+```bash
+Route::post('login', 'Api\AuthController@login');
+
+Route::post('refresh','Api\AuthController@refresh');
+
+//token is necessary for access this route
+Route::middleware(['auth:api','jwt.refresh'])->namespace('Api')->group(function () {
+    Route::get('users', 'AuthController@users');
+    Route::post('logout','AuthController@logout');
+});
+
+```
+
+
+in file Kernel.php configure the **jwt.refresh** *(the last key of array)*
+```bash
+    protected $routeMiddleware = [
+        'auth' => \App\Http\Middleware\Authenticate::class,
+        'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
+        'can' => \Illuminate\Auth\Middleware\Authorize::class,
+        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
+        'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
+        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'jwt.refresh' => RefreshToken::class,
+    ];
+```
+
+in .env file set a time of refresh 
+```bash
+JWT_BLACLIST_GRACE_PERIOD=30
+```

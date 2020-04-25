@@ -14,16 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::post('login', 'Api\AuthController@login');
 
 Route::post('refresh','Api\AuthController@refresh');
 
 //token is necessary for access this route
-Route::middleware('auth:api')->namespace('Api')->group(function () {
+Route::middleware(['auth:api','jwt.refresh'])->namespace('Api')->group(function () {
     Route::get('users', 'AuthController@users');
     Route::post('logout','AuthController@logout');
 });
