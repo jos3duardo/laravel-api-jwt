@@ -146,3 +146,7 @@ in .env file set a time of refresh
 ```bash
 JWT_BLACLIST_GRACE_PERIOD=30
 ```
+the route for refresh token automatic not is necessary logged 
+
+
+## THE END
