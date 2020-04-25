@@ -14,11 +14,11 @@ in file config/auth.php change the driver for **jwt**
             'hash' => false,
         ],
 ```
-in mode of User implements this interface and add 2 functions in file
+in mode of User implements this interface **JWTSubject** and add 2 functions in file
 ```bash
 class User extends Authenticatable implements JWTSubject
 
- /**
+     /**
      * @inheritDoc
      */
     public function getJWTIdentifier()
