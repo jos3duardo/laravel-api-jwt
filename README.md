@@ -52,3 +52,14 @@ make command
 ```bash
 php artisan migrate --seed
 ```
+
+configuration routes for access the application in file routes/api.php
+```bash
+Route::post('login', 'Api\AuthController@login');
+
+//token is necessary for access this route
+Route::middleware('auth:api')->namespace('Api')->group(function () {
+    Route::get('users', 'AuthController@users');
+});
+``` 
+

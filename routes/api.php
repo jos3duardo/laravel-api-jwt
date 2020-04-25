@@ -19,3 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('login', 'Api\AuthController@login');
+
+//token is necessary for access this route
+Route::middleware('auth:api')->namespace('Api')->group(function () {
+    Route::get('users', 'AuthController@users');
+});
