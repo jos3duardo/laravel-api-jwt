@@ -63,3 +63,18 @@ Route::middleware('auth:api')->namespace('Api')->group(function () {
 });
 ``` 
 
+make a request using method http POST for login. In this case return a token case the can access information are correct case, otherwise return null.
+
+i am be using insomnia for tests of API but your can use your favorite software for it 
+
+create a json with email and password for user what will use in login.   
+
+preview image e.g.
+
+![request](docs/login.png)
+
+after you will make login the request return a token, you will use the token for create a new request where access a new route com HTTP GET for list all users, but this route is protected. You only can access that route with token   
+
+example image of the user listing route
+
+![request](docs/list-users.png)
