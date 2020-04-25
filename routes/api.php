@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('login', 'Api\AuthController@login');
 
-
+Route::post('refresh','AuthController@refresh');
 
 //token is necessary for access this route
 Route::middleware('auth:api')->namespace('Api')->group(function () {
