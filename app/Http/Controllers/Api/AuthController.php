@@ -44,10 +44,24 @@ class AuthController extends Controller
             ],400);
     }
 
+    /**
+     * Return a list of users
+     * @return User[]|\Illuminate\Database\Eloquent\Collection
+     */
     public function users(){
         return User::all();
     }
 
+    /**
+     * Make logout
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function logout()
+    {
+        \Auth::guard('api')->logout();
+        return response()->json([], 204);
+    }
 
 
 }
